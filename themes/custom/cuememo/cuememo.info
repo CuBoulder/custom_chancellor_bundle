@@ -1,0 +1,7 @@
+name = CU eMemo Theme
+description = Theme for exporting content to Harris
+screenshot = images/screenshot.png
+core = 7.x
+engine = phptemplate
+
+regions[content] = Content
