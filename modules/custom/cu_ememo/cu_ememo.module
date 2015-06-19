@@ -1,0 +1,106 @@
+<?php
+/**
+ * @file
+ * Code for the eMemo feature.
+ */
+
+include_once 'cu_ememo.features.inc';
+
+/**
+ * Implements hook_theme_registry_alter().
+ *
+ * Let Drupal know that we've got bean--articles.tpl.php in our module directory.
+ */
+function cu_ememo_theme_registry_alter(&$theme_registry) {
+  $module_path = drupal_get_path('module', 'cu_ememo');
+  $theme_registry_copy = $theme_registry;
+  _theme_process_registry($theme_registry_copy, 'phptemplate', 'theme_engine', 'node', $module_path);
+  $theme_registry += array_diff_key($theme_registry_copy, $theme_registry);
+  $hooks = array('bean');
+  foreach ($hooks as $h) {
+	  if (isset($theme_registry[$h]['theme paths'])) {
+	    $first_element = array_shift($theme_registry[$h]['theme paths']);
+	    array_unshift($theme_registry[$h]['theme paths'], array_shift($theme_registry[$h]['theme paths']), $module_path);
+  	}
+  }
+}
+/**
+ * Implements hook_page_alter().
+ *
+ */
+function cu_ememo_page_alter(&$vars) {
+  drupal_add_css(drupal_get_path('module', 'cu_ememo') . '/css/cu-ememo.css');
+}
+
+/**
+ * Implements hook_preprocess_page().
+ *
+ */
+function cu_ememo_preprocess_page(&$vars) {
+  // Get Display Title(field_ememo_display_title) to use as page title on ememo nodes
+  if($vars['node']->type == 'ememo') {
+    $title = $vars['node']->field_ememo_display_title[LANGUAGE_NONE][0]['value'];
+    $vars['title'] = $title;
+    drupal_set_title($title);
+  }
+}
+
+function cu_ememo_shortcode_info() {
+  $shortcodes = array();
+  $shortcodes['audioicon'] = array(
+    'title' => t('Audio Icon'),
+    'description' => t('Creates audio image icon'),
+    'process callback' => 'cu_ememo_audioicon',
+    'tips callback' => 'cu_ememo_audioicon_tips',
+    'default settings' => array(),
+  );
+  $shortcodes['videoicon'] = array(
+    'title' => t('Video Icon'),
+    'description' => t('Creates video icon image'),
+    'process callback' => 'cu_ememo_videoicon',
+    'tips callback' => 'cu_ememo_videoicon_tips',
+    'default settings' => array(),
+  );
+  return $shortcodes;
+}
+
+/**
+ * Audioicon Shortcode.
+ */
+function cu_ememo_audioicon($attrs, $content = NULL) {
+  extract(shortcode_attrs(array(
+        'type'       => 1,
+      ), $attrs));
+  global $base_url;
+  $img_path = $base_url . '/' . drupal_get_path('module', 'cu_ememo') . '/images/audioicon.png';
+  return '<img src="' . $img_path . '" alt="audio icon" class="image-icon" />';
+}
+
+/**
+ * Audioicon Tips.
+ */
+function cu_ememo_audioicon_tips($format, $long) {
+  $output = '[audioicon /]';
+  return $output;
+}
+
+/**
+ * Videoicon Shortcode.
+ */
+function cu_ememo_videoicon($attrs, $content = NULL) {
+  extract(shortcode_attrs(array(
+        'type'       => 1,
+      ), $attrs));
+  global $base_url;
+  $img_path = $base_url . '/' . drupal_get_path('module', 'cu_ememo') . '/images/videoicon.png';
+  return '<img src="' . $img_path . '" alt="video icon" class="image-icon" />';
+}
+
+/**
+ * Videoicon Tips.
+ */
+function cu_ememo_videoicon_tips($format, $long) {
+  $output = '[videoicon /]';
+  return $output;
+}
+

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Communication feature.
+ */
+
+include_once 'chancellor_communication.features.inc';

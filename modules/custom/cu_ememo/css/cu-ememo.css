@@ -1,0 +1,49 @@
+#ememo-top-photo {
+  margin-bottom: 20px;
+}
+#ememo-top-photo img {
+  display: block;
+  width:100%;
+  height:auto;
+}
+
+.field-name-field-ememo-section-images div img {
+  width:100%;
+  max-width: 100%;
+  height: auto;
+}
+.sub-title-wrapper {
+  padding:10px;
+  background-color: #333;
+  color:#fff;
+}
+.sub-title-wrapper .date {
+  float: right;
+  margin-left: 20px;
+}
+.sub-title-wrapper h2 {
+  margin: 0;
+  padding: 0;
+  line-height: 120%;
+}
+.ememo-photo {
+  font-size: 85%;
+  line-height: 110%;
+}
+
+.ememo-block-column {
+  width:48%;
+  margin-right:2%;
+  float: left;
+}
+.issue-date {
+  padding: 5px 10px;
+  background: #333;
+  font-size: 85%;
+  color:#fff;
+}
+img.image-icon {
+  width: 12px !important;
+  height: 12px !important;
+  vertical-align:middle;
+}
