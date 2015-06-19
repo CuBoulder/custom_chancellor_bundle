@@ -1,1 +1,1 @@
-# express_chancellor
+drush dslm-add-custom chancellor
