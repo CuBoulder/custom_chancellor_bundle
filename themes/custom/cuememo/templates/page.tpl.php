@@ -26,6 +26,7 @@
   //print render($page['content']); 
   $email = $cssToInlineStyles->convert();
   $email = str_replace('src="https://', 'src="http://', $email);
+  $email = str_replace('src="//', 'src="http://', $email);
   //$email = str_replace('—', '&mdash;', $email);
   //First convert the special characters to HTML-Entities using a multi-byte safe function
 	//$email = mb_convert_encoding($email, 'HTML-ENTITIES', 'UTF-8');
