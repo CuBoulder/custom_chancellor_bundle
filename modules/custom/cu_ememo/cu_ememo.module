@@ -38,7 +38,7 @@ function cu_ememo_page_alter(&$vars) {
  */
 function cu_ememo_preprocess_page(&$vars) {
   // Get Display Title(field_ememo_display_title) to use as page title on ememo nodes
-  if($vars['node']->type == 'ememo') {
+  if(isset($vars['node']->type) && $vars['node']->type == 'ememo') {
     $title = $vars['node']->field_ememo_display_title[LANGUAGE_NONE][0]['value'];
     $vars['title'] = $title;
     drupal_set_title($title);
