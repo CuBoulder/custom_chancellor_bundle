@@ -726,6 +726,7 @@ h6 {font-size: 16px;}
 }
 img {
   float: none;
+  height:auto;
 }
 .main-content {
   background:#fff;
