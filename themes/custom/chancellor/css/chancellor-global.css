@@ -1,4 +1,4 @@
-body { -moz-osx-font-smoothing: grayscale; }
+body { -moz-osx-font-smoothing: grayscale; -webkit-text-size-adjust: none; }
 
 body.layout-boxed { background-color: #fafafa; }
 

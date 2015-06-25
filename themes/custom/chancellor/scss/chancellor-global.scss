@@ -2,6 +2,7 @@
 @import "modules/_colors.scss";
 body {
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: none;
 }
 
 body.layout-boxed  {
