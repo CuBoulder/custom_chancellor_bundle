@@ -1,1 +1,70 @@
 <?php
+
+function cu_chancellor_bundle_secure_permissions($role) {
+  $permissions = array(
+    'anonymous user' => array(
+
+    ),
+    'authenticated user' => array(
+
+    ),
+    'administrator' => array(
+      'create communication content',
+      'create ememo content',
+      'create in_the_news content',
+      'delete any communication content',
+      'delete any ememo content',
+      'delete any in_the_news content',
+      'delete own communication content',
+      'delete own ememo content',
+      'delete own in_the_news content',
+      'edit any communication content',
+      'edit any ememo content',
+      'edit any in_the_news content',
+      'edit own communication content',
+      'edit own ememo content',
+      'edit own in_the_news content',
+    ),
+    'developer' => array(
+      'create communication content',
+      'create ememo content',
+      'create in_the_news content',
+      'delete any communication content',
+      'delete any ememo content',
+      'delete any in_the_news content',
+      'delete own communication content',
+      'delete own ememo content',
+      'delete own in_the_news content',
+      'edit any communication content',
+      'edit any ememo content',
+      'edit any in_the_news content',
+      'edit own communication content',
+      'edit own ememo content',
+      'edit own in_the_news content',
+    ),
+    'edit_my_content' => array(
+
+    ),
+    'site_owner' => array(
+      'create communication content',
+      'create ememo content',
+      'create in_the_news content',
+      'delete any communication content',
+      'delete any ememo content',
+      'delete any in_the_news content',
+      'delete own communication content',
+      'delete own ememo content',
+      'delete own in_the_news content',
+      'edit any communication content',
+      'edit any ememo content',
+      'edit any in_the_news content',
+      'edit own communication content',
+      'edit own ememo content',
+      'edit own in_the_news content',
+    ),
+  );
+
+  if (isset($permissions[$role])) {
+    return $permissions[$role];
+  }
+}
