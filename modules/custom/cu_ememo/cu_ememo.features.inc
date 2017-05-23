@@ -79,7 +79,7 @@ function cu_ememo_image_default_styles() {
 function cu_ememo_node_info() {
   $items = array(
     'ememo' => array(
-      'name' => t('Newsletter'),
+      'name' => t('Chancellor Newsletter'),
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',
