@@ -4,3 +4,4 @@ core = 7.x
 dependencies[] = chancellor_communication
 dependencies[] = chancellor_in_the_news
 dependencies[] = cu_ememo
+optional-dependencies[] = themekey
