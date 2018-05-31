@@ -1,4 +1,4 @@
-<div id="page-wrapper">
+<div id="page-wrapper" class="page-wrapper">
   <div id="page" class="<?php print $classes; ?>">
     <?php if (!empty($page['alerts'])): ?>
     <div id="alerts-wide-wrapper" class="section-wrapper">
@@ -7,22 +7,39 @@
       </div>
     </div>
     <?php endif; ?>
-
-    <div id="header-wrapper" class="section-wrapper">
+    <div id="search" tabindex="-1">
+      <div class="element-max-width search-wrapper">
+        <?php
+          if (!empty($page['search_box'])) {
+            print render($page['search_box']);
+          }
+        ?>
+      </div>
+    </div>
+    <div id="header-wrapper" class="section-wrapper header-wrapper">
       <header class="header container-max clearfix" id="header" role="banner">
         <div id="branding" class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
           <?php print render($page['branding']); ?>
           <div class="mobile-menu-toggle">
-            <a id="toggle" href="#mobile-menu" title="Menu"><span class="mobile-menu-text">Menu </span><i class="fa fa-reorder fa-fw"></i></a>
+            <button id="toggle" aria-haspopup="true" aria-expanded="false" aria-controls="mobile-menu" aria-label="Navigation"><span class="mobile-menu-text">Menu </span><i class="fa fa-reorder fa-fw"></i></button>
           </div>
         </div>
-        <div id="search"class="col-lg-4 col-md-4">
-          <?php print render($page['search_box']); ?>
+        <div id="header-content" class="col-lg-4 col-md-4 col-sm-12 col-xs-12 clearfix">
+          <?php
+          $options = variable_get('cu_search_options', array('this' => 'this'));
+          foreach ($options as $key => $option) {
+            if (!$option) {
+              unset($options[$key]);
+            }
+          }
+            if (!empty($options) && !empty($page['search_box'])):
+          ?>
+            <a href="#search" class="search-toggle"><i class="fa fa-search"></i><span class="element-invisible">Search</span></a>
+          <?php endif; ?>
         </div>
       </header>
     </div>
     <div id="navigation-wrapper" class="navigation-wrapper">
-
       <div id="main-menu-wrapper" class="section-wrapper">
         <div id="navigation" class="container-max">
           <div class="nav-inner col-lg-12 col-md-12 clearfix">
@@ -30,7 +47,6 @@
           </div>
         </div>
       </div>
-
       <?php if (theme_get_setting('use_action_menu') == FALSE): ?>
       <div id="secondary-menu-wrapper" class="section-wrapper">
         <div id="secondary-navigation" class="container-max">
@@ -46,7 +62,11 @@
 
       <div id="mobile-navigation">
         <div id="mobile-search">
-          <?php print render($page['search_box']); ?>
+          <?php
+            if (!empty($page['search_box'])) {
+              print render($page['search_box']);
+            }
+          ?>
         </div>
         <nav id="mobile-menu" role="navigation">
         <?php if (isset($mobile_menu) && !empty($mobile_menu)): ?>
@@ -62,6 +82,31 @@
         </nav>
       </div>
     </div>
+    <div class="express-messages">
+      <?php if ($messages): ?>
+        <div class="express-message">
+          <div class="messages1">
+            <?php print $messages; ?>
+          </div>
+        </div>
+      <?php endif; ?>
+
+      <?php if (!empty($tabs['#primary']) || !empty($tabs['#secondary'])): ?>
+        <div class="express-message">
+          <div class="tabs"><?php print render($tabs); ?></div>
+        </div>
+      <?php endif; ?>
+
+      <?php if (!empty($page['help'])): ?>
+        <div class=" express-message"><?php print render($page['help']); ?></div>
+      <?php endif; ?>
+
+      <?php if ($action_links): ?>
+        <div class="express-message">
+          <ul class="action-links"><?php print render($action_links); ?></ul>
+        </div>
+      <?php endif; ?>
+    </div>
     <div class="top-content-wrapper"><div class="top-content">
       <?php if (!empty($page['intro'])): ?>
       <div id="intro-wide-wrapper" class="section-wrapper">
@@ -70,7 +115,7 @@
       <?php endif; ?>
 
       <?php if (!empty($page['slider'])): ?>
-      <div id="slider-wrapper" class="section-wrapper <?php if (!empty($page['slider_sidebar'])) { print 'has-slider-sidebar'; } ?>">
+      <div id="slider-wrapper" class="section-wrapper slider-wrapper<?php if (!empty($page['slider_sidebar'])) { print 'has-slider-sidebar'; } ?>">
         <div id="slider" class="clearfix element-max-width-padding">
           <?php print render($page['slider']); ?>
         </div>
@@ -87,82 +132,91 @@
         ?>
       <?php endif; ?>
 
-      <div id="content-wrapper" class="section-wrapper">
-        <div id="main" class="clearfix container-max">
-          <div class="breadcrum-wrapper col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <?php print $breadcrumb; ?>
-          </div>
-          <div id="content" class="<?php print $main_content_classes; ?>" role="main">
-            <div class="section-inner">
+      <div id="content-wrapper" class="section-wrapper content-wrapper">
+        <div class="section-wrapper title-wrapper">
+
+        </div>
+        <div id="main" class="clearfix">
+          <div class="clearfix container-max content-inner-wrapper">
+            <div class="breadcrumb-wrapper col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <?php print $breadcrumb; ?>
+            </div>
+            <div class="main-title-wrapper col-lg-12 col-md-12 col-sm-12 col-xs-12">
               <a id="main-content"></a>
               <?php print render($title_prefix); ?>
               <?php if ($title): ?>
                 <h1 class="page__title title <?php if (isset($title_hidden)) { print 'element-invisible'; } ?>" id="page-title"><?php print $title; ?></h1>
               <?php endif; ?>
               <?php print render($title_suffix); ?>
-              <?php print $messages; ?>
-              <div class="tabs"><?php print render($tabs); ?></div>
-              <?php print render($page['help']); ?>
-              <?php if ($action_links): ?>
-                <ul class="action-links"><?php print render($action_links); ?></ul>
-              <?php endif; ?>
+            </div>
+
+
+
+          </div>
+          <?php if (!empty($page['post_title_wide'])): ?>
+            <div id="post-title-wide-wrapper" class="section-wrapper">
+              <?php print render($page['post_title_wide']); ?>
+            </div>
+          <?php endif; ?>
+          <?php if (!empty($page['post_title'])): ?>
+            <div id="post-title-wrapper" class="section-wrapper container-max">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <?php print render($page['post_title']); ?>
+              </div>
+            </div>
+          <?php endif; ?>
+          <div id="main-content-wrapper" class="container-max">
+            <div id="content" class="<?php print $main_content_classes; ?>" role="main">
               <?php print render($page['content']); ?>
               <?php print $feed_icons; ?>
             </div>
+
+
+            <?php
+              // Render the sidebars to see if there's anything in them.
+              $sidebar_first  = render($page['sidebar_first']);
+              $sidebar_second = render($page['sidebar_second']);
+            ?>
+
+            <?php
+              // Order the sidebars depending on which is the primary sidebar
+              if ($sidebar_first || $sidebar_second): ?>
+              <aside class="sidebars">
+                <?php if (theme_get_setting('primary_sidebar') == 'primary-sidebar-first'): ?>
+                  <div class="sidebar-first sidebar <?php print $sidebar_first_classes; ?>">
+                    <?php print $sidebar_first; ?>
+                  </div>
+                  <div class="sidebar-second sidebar <?php print $sidebar_second_classes; ?>">
+                    <?php print $sidebar_second; ?>
+                  </div>
+                <?php else: ?>
+                  <div class="sidebar-second sidebar <?php print $sidebar_second_classes; ?>">
+                    <?php print $sidebar_second; ?>
+                  </div>
+                  <div class="sidebar-first sidebar <?php print $sidebar_first_classes; ?>">
+                    <?php print $sidebar_first; ?>
+                  </div>
+                <?php endif; ?>
+              </aside>
+            <?php endif; ?>
           </div>
-
-          <?php
-            // Render the sidebars to see if there's anything in them.
-            $sidebar_first  = render($page['sidebar_first']);
-            $sidebar_second = render($page['sidebar_second']);
-          ?>
-
-          <?php
-            // Order the sidebars depending on which is the primary sidebar
-            if ($sidebar_first || $sidebar_second): ?>
-            <aside class="sidebars">
-              <?php if (theme_get_setting('primary_sidebar') == 'primary-sidebar-first'): ?>
-                <div class="sidebar-first sidebar <?php print $sidebar_first_classes; ?>">
-                  <div class="section-inner">
-                    <?php print $sidebar_first; ?>
-                  </div>
-                </div>
-                <div class="sidebar-second sidebar <?php print $sidebar_second_classes; ?>">
-                  <div class="section-inner">
-                    <?php print $sidebar_second; ?>
-                  </div>
-                </div>
-              <?php else: ?>
-                <div class="sidebar-second sidebar <?php print $sidebar_second_classes; ?>">
-                  <div class="section-inner">
-                    <?php print $sidebar_second; ?>
-                  </div>
-                </div>
-                <div class="sidebar-first sidebar <?php print $sidebar_first_classes; ?>">
-                  <div class="section-inner">
-                    <?php print $sidebar_first; ?>
-                  </div>
-                </div>
-              <?php endif; ?>
-            </aside>
-          <?php endif; ?>
         </div>
       </div>
 
       <?php if (!empty($page['feature_layout'])): ?>
-        <div id="feature-layout-wrapper" class="section-wrapper">
+        <div id="feature-layout-wrapper" class="section-wrapper feature-layout-wrapper">
           <?php print render($page['feature_layout']); ?>
         </div>
       <?php endif; ?>
 
       <?php if (!empty($page['wide_2'])): ?>
-        <div id="post-wide-wrapper" class="section-wrapper">
+        <div id="post-wide-wrapper" class="section-wrapper post-wide-wrapper">
           <?php print render($page['wide_2']); ?>
         </div>
       <?php endif; ?>
 
       <?php if (!empty($page['after_content'])): ?>
-        <div id="after-content-wrapper" class="section-wrapper">
+        <div id="after-content-wrapper" class="section-wrapper after-content-wrapper">
           <div id="after-content" class="container-max">
             <?php print render($page['after_content']); ?>
           </div>
@@ -170,7 +224,7 @@
       <?php endif; ?>
     </div></div>
     <?php if (!empty($page['lower'])): ?>
-      <div id="after-content2-wrapper" class="section-wrapper">
+      <div id="after-content2-wrapper" class="section-wrapper after-content2-wrapper">
         <div id="after-content-2" class="container-max">
           <?php print render($page['lower']); ?>
         </div>
@@ -178,10 +232,10 @@
     <?php endif; ?>
 
 
-    <div id="footer-section">
+    <div id="footer-section" class='footer-section'>
       <?php if (!empty($page['footer'])): ?>
-        <div id="footer-wrapper" class="section-wrapper">
-          <div id="footer" class="container-max">
+        <div id="footer-wrapper" class="section-wrapper footer-wrapper">
+          <div id="footer" class="footer container-max">
             <div class="col-lg-12 col-md-12">
               <div class="row">
                 <?php print render($page['footer']); ?>
@@ -192,7 +246,7 @@
       <?php endif; ?>
 
       <?php if (isset($footer_menu) && !empty($footer_menu)): ?>
-        <div id="footer-menu-wrapper" class="section-wrapper <?php print $footer_menu_color; ?>">
+        <div id="footer-menu-wrapper" class="section-wrapper footer-menu-wrapper <?php print $footer_menu_color; ?>">
           <div id="footer-navigation" class="container-max">
             <div class="nav-inner col-lg-12 col-md-12 clearfix">
               <nav id="footer-menu">
@@ -202,7 +256,7 @@
           </div>
         </div>
       <?php endif; ?>
-      <div id="site-info-wrapper" class="section-wrapper">
+      <div id="site-info-wrapper" class="section-wrapper site-info-wrapper">
         <div id="site-info" class="container-max">
           <?php print render($page['site_info']); ?>
         </div>
