@@ -1,0 +1,23 @@
+@media only screen and (max-width: 600px) {
+
+  table[class="body"] .right-text-pad {
+    padding-left: 10px !important;
+  }
+
+  table[class="body"] .left-text-pad {
+    padding-right: 10px !important;
+  }
+  
+  table.photo-wrapper {
+    width:auto !important;
+    float: none !important;
+    margin-right:0 !important;
+    margin-left:0 !important;
+  }
+  h1.email-title {
+    font-size:24px !important;
+  }
+  h2.email-subtitle {
+    font-size:18px !important;
+  }    
+}
