@@ -25,6 +25,21 @@ function custom_chancellor_bundle_secure_permissions($role) {
       'edit own ememo content',
       'edit own in_the_news content',
     ),
+    'content_editor' => array(
+      'create communication content',
+      'create in_the_news content',
+      'create ememo content',
+      'delete any communication content',
+      'delete own communication content',
+      'delete any ememo content',
+      'delete own ememo content',
+      'delete any in_the_news content',
+      'delete own in_the_news content',
+      'edit any communication content',
+      'edit own communication content',
+      'edit any in_the_news content',
+      'edit own in_the_news content',
+    ),
     'developer' => array(
       'create communication content',
       'create ememo content',
@@ -43,9 +58,16 @@ function custom_chancellor_bundle_secure_permissions($role) {
       'edit own in_the_news content',
     ),
     'edit_my_content' => array(
-
+      'edit own communication content',
+      'edit own ememo content',
+      'edit own in_the_news content',
     ),
-    'site_owner' => array(
+    'edit_only' => array(
+      'edit any communication content',
+      'edit any ememo content',
+      'edit any in_the_news content',
+    ),
+    'site_editor' => array(
       'create communication content',
       'create ememo content',
       'create in_the_news content',
@@ -62,7 +84,7 @@ function custom_chancellor_bundle_secure_permissions($role) {
       'edit own ememo content',
       'edit own in_the_news content',
     ),
-    'site_editor' => array(
+    'site_owner' => array(
       'create communication content',
       'create ememo content',
       'create in_the_news content',
