@@ -84,7 +84,6 @@ features[variable][] = node_options_ememo
 features[variable][] = node_preview_ememo
 features[variable][] = node_submitted_ememo
 features[variable][] = pathauto_node_ememo_pattern
-features[variable][] = theme_default
 features[variable][] = themekey_attributes
 features[variable][] = themekey_maps
 features[variable][] = themekey_paths
