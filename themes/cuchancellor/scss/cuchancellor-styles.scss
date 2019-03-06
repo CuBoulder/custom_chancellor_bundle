@@ -1,5 +1,23 @@
-@import "../../expressbase/scss/modules/_colors.scss";
-@import "../../expressbase/scss/modules/_global.scss";
+$cugold: #cfb87c;
+$border: rgba(128,128,128,.333);
+
+@mixin gradient($color, $color2:false) {
+  @if $color2 {
+
+  }
+  @else {
+    $color2: darken($color, 5%);
+    $color2: scale-color($color, $lightness: -20%);
+  }
+  background-color: $color;
+  background-image: -webkit-gradient(linear, left top, left bottom, from($color), to($color2));
+  background-image: -webkit-linear-gradient(top, $color, $color2);
+  background-image: -moz-linear-gradient(top, $color, $color2);
+  background-image: -o-linear-gradient(top, $color, $color2);
+  background-image: -ms-linear-gradient(top, $color, $color2);
+  background-image: linear-gradient(top, $color, $color2);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#{ie_hex_str($color)}', EndColorStr='#{ie_hex_str($color2)}');
+}
 
 
 body.layout-boxed  {
@@ -12,10 +30,12 @@ body.layout-wide {
 .layout-boxed #page {
   width:960px;
   margin: 0 auto;
-  @include rgbashadow(0px, 0px, 80px, #000, 0.25);
 }
 .top-content {
   background-color: #fff;
+}
+#navigation-wrapper {
+  flex-direction: column;
 }
 #footer-section {
   border-top:5px solid $cugold;
@@ -30,7 +50,7 @@ body.layout-wide {
   }
 }
 #footer-wrapper {
-  background-color: $bg_dark1;
+  background-color: #272727;
   padding: 40px 0 20px;
   background-image: url(../images/content-shadow.png);
   background-repeat: repeat-x;
@@ -40,7 +60,7 @@ body.layout-wide {
   padding: 40px 0 20px;
 }
 #slider-wrapper {
-  background-color: $white;
+  background-color: #fff;
   background-image: url(../images/content-shadow.png);
   background-repeat: repeat-x;
   border-bottom: 1px solid #d7d7d7;
@@ -129,7 +149,7 @@ body.layout-wide {
   .views-row {
     padding-bottom:5px;
     margin-bottom:5px;
-    border-bottom: 1px solid $border_color;
+    border-bottom: 1px solid $border;
   }
   .views-row-last {
     border:none;
